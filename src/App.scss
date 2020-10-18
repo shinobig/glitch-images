@@ -1,45 +1,72 @@
-
-
 body {
-	height: 100vh;
-	width: 100vw;
-}
-
-.App{
+  height: 100vh;
+  width: 100vw;
 }
 
 .container {
-	background-color: black;
-	pointer-events:none;
-	position: relative;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 80vh;
-	overflow: hidden;
-	padding-top: 10%;
-	> div {
-		width: 100%;
-		height: 100vh;
-		position: absolute;
-		background-size: cover;
-		mix-blend-mode: screen;
-		background-blend-mode: darken;
-	//	background-image: url('./images/photo-1602688355949-ae34f91c79c6.jpg');
-		will-change:opacity;
+  background-color: black;
+  pointer-events: none;
+  position: relative;
+  top: -10%;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  padding-top: 10%;
 
-		&.r {
-			background-color: red;
-			opacity: .2;
-		}
+  >div {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    background-size: cover;
+    mix-blend-mode: screen;
+    background-blend-mode: darken;
+    //	background-image: url('./images/photo-1602688355949-ae34f91c79c6.jpg');
+    will-change: opacity;
 
-		&.g {
+    &.r {
+      background-color: red;
+    }
+
+    &.g {
 			background-color: lime;
-		opacity: .8;
-		}
+			opacity: .9;
+    }
 
-		&.b {
-			background-color: blue;
-		}
+    &.b {
+      background-color: blue;
+    }
+  }
+}
+
+.random-glitch {
+  background-color: red;
+  z-index: 999;
+}
+
+.glitch-container {
+  overflow: hidden;
+  z-index: 99;
+  opacity: 1;
+}
+
+.glitch-image {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+}
+
+.glitch-text{
+	position: absolute;
+	z-index: 101;
+	top: 40vh;
+	left: 0;
+	
+	width: 100vw;
+	
+	h1{
+		font-family: 'Courier Prime', monospace;
+		color:white;
+		text-align: center;
 	}
 }

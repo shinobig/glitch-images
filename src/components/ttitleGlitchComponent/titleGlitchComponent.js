@@ -5,7 +5,7 @@ const titleGlitchComponent = (props) => {
 
 return(
   <div className="glitch-text">
-    <h1>{props.titleText}</h1>
+    <h2>{props.titleText}</h2>
   </div>
 )
 }

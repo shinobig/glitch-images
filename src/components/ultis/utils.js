@@ -1,0 +1,1 @@
+export const randomNumberCreator = (max, min) => (parseInt(Math.random() * (max - min) + min));

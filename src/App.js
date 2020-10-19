@@ -1,7 +1,14 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import './App.scss';
-import image1 from './images/pexels-fikret-kabay-4786366.jpg'
+import image1 from './images/image1.jpg'
+import image2 from './images/image2.jpg'
+import image3 from './images/image3.jpg'
+import image4 from './images/image4.jpg'
+import image5 from './images/image5.jpg'
+import image6 from './images/image6.jpg'
+import image7 from './images/image7.jpg'
+import { randomNumberCreator } from './components/ultis/utils';
 import RandomGlitchZoomComponent from './components/randomGlitchZoomComponent/randomGlitchZoomComponent';
 import TitleGlitchComponent from './components/ttitleGlitchComponent/titleGlitchComponent';
 //import RandomGlitchZoomComponentTest from './components/randomGlitchZoomComponent/randomGlitchZoomComponentTest';
@@ -14,18 +21,19 @@ class App extends Component {
 		super(props);
 		this.state = {
 			e: {
-				offsetX: 100,
-				offsetY: 100
+				offsetX: 80,
+				offsetY: 80
 			},
 			layer: [],
 			backgroundImage: image1,
+			imagesArr: [image1, image2, image3, image4, image5, image6, image7],
 			interval: '',
+			imageInterval: '',
 			seconds: -1,
 			randomGlitchZoom: false,
 			glitchSizes: {},
 			numberofGlitches: 0,
 			glitchesAvailable: [],
-			titleText: '',
 		}
 		this.imageItem = null;
 		this.myTween = null;
@@ -38,13 +46,12 @@ class App extends Component {
 		this.setSeconds = this.setSeconds.bind(this);
 		this.randomGlitchZoomHandler = this.randomGlitchZoomHandler.bind(this);
 		this.calculateGlitch = this.calculateGlitch.bind(this);
-		this.selectTitleTextHandler = this.selectTitleTextHandler.bind(this);
+		this.selectImageHandler = this.selectImageHandler.bind(this);
 	}
 
 	componentDidMount() {
 		let newLayers = [this.layer1, this.layer2, this.layer3];
 		this.imageTimerHandler();
-		//this.createGlitchRows();
 		this.setState({
 			layers: newLayers
 		});
@@ -95,12 +102,8 @@ class App extends Component {
 
 
 			let duration = parseFloat(layer.getAttribute("data-duration"));
-
 			let offsetX = window.innerWidth / 2 - e.offsetX;
 			let offsetY = window.innerHeight / 2 - e.offsetY;
-
-
-
 			let x = this.mapRange(offsetX, 0, window.innerWidth / 2, 0, 100);
 			let y = this.mapRange(offsetY, 0, window.innerHeight / 2, 0, 100);
 			// console.log(x, y);
@@ -117,14 +120,13 @@ class App extends Component {
 
 	imageTimerHandler() {
 		this.setState({
-			interval: setInterval(() => {/*
-				const newSecond = this.state.seconds + .1
-		this.selectTitleTextHandler(newSecond);
-	
-				this.setSeconds(newSecond);	*/
+			interval: setInterval(() => {
 				this.randomGlitchZoomHandler();
 				this.createGlitchRows();
-			}, 100)
+				let newSeconds = this.state.seconds + .1;
+				this.setSeconds(newSeconds);
+				this.selectImageHandler(newSeconds);
+			}, 100),
 		});
 	}
 
@@ -136,17 +138,17 @@ class App extends Component {
 	}
 
 	randomGlitchZoomHandler() {
-		let chanceOfGlitch = parseInt(Math.random() * (10 - 1) + 1);
+		let chanceOfGlitch = randomNumberCreator(10, 1);
 		this.setState({
 			randomGlitchZoom: (chanceOfGlitch > 5),
 		})
 	}
 
 	calculateGlitch() {
-		let maxWidth = parseInt(Math.random() * (50 - 15) + 15);
-		let maxHeight = parseInt(Math.random() * (10 - 1) + 1);
-		let positionx = parseInt(Math.random() * (0 - 0) + 0);
-		let positiony = parseInt(Math.random() * (100 - 0) + 0);
+		let maxWidth = randomNumberCreator(50, 15);
+		let maxHeight = randomNumberCreator(10, 1);
+		let positionx = randomNumberCreator(0, 0);
+		let positiony = randomNumberCreator(100, 0);
 
 		return {
 			maxWidth,
@@ -157,7 +159,7 @@ class App extends Component {
 	}
 
 	createGlitchRows() {
-		let numberOFGlitches = parseInt(Math.random() * (6 - 1) + 1);
+		let numberOFGlitches = randomNumberCreator(6, 1);
 		let glitchesArr = [];
 		for (let i = 0; i <= numberOFGlitches; i++) {
 			glitchesArr.push(this.calculateGlitch());
@@ -168,35 +170,15 @@ class App extends Component {
 	}
 
 
-
-	selectTitleTextHandler(time) {
-		console.log(time)
-		switch (time) {
-			case 2:
-				this.setState({
-					titleText: 'Slum'
-				});
-				break;
-
-			case 33:
-				this.setState({
-					titleText: 'Will'
-				});
-				break;
-			case 34:
-				this.setState({
-					titleText: 'Catch'
-				});
-				break;
-
-			case 34:
-				this.setState({
-					titleText: 'My'
-				});
-				break;
+	selectImageHandler(counter) {
+		if (counter > 5) {
+			const randomImage = this.state.imagesArr[randomNumberCreator(7, 1)];
+			this.setState({
+				backgroundImage: randomImage,
+				seconds: -1,
+			})
 		}
 	}
-
 
 
 	render() {
@@ -206,24 +188,18 @@ class App extends Component {
 			maxWidth={glitch.maxWidth}
 			positionx={glitch.positionx}
 			positiony={glitch.positiony}
-			key={`${glitch.maxHeight}${glitch.positionx}-${Math.random() * (100 - 0) + 0}`}
+			key={`${glitch.maxHeight}${glitch.positionx}-${randomNumberCreator(10000, 0)}`}
 			imageSrc={this.state.backgroundImage}
 		/>
 		));
 
+
 		return (
 			<div className="App">
-				{/*
-<RandomGlitchZoomComponentTest
-			maxHeight={30}
-			maxWidth={30}
-			positionx={30}
-			positiony={30}
-			imageSrc = {this.state.backgroundImage}
-			/> 
-
-				*/}
-				<TitleGlitchComponent titleText={this.state.titleText} />
+				<div className="text-container" >
+				{}
+				</div>
+				
 				{this.state.randomGlitchZoom ? randomGlitches : ''}
 				<div className="container">
 

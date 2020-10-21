@@ -14,8 +14,6 @@ import TitleGlitchComponent from './components/ttitleGlitchComponent/titleGlitch
 //import RandomGlitchZoomComponentTest from './components/randomGlitchZoomComponent/randomGlitchZoomComponentTest';
 
 import { TweenMax, Power3, TweenLite } from 'gsap';
-
-
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -47,6 +45,7 @@ class App extends Component {
 		this.randomGlitchZoomHandler = this.randomGlitchZoomHandler.bind(this);
 		this.calculateGlitch = this.calculateGlitch.bind(this);
 		this.selectImageHandler = this.selectImageHandler.bind(this);
+		this.tweenLitHandler = this.tweenLitHandler.bind(this);
 	}
 
 	componentDidMount() {
@@ -56,41 +55,26 @@ class App extends Component {
 			layers: newLayers
 		});
 
-
-		TweenLite.to(this.state.e, 12, {
-			ease: Power3.easeOut,
-			offsetX: Math.random() * window.innerWidth,
-			offsetY: Math.random() * window.innerHeight,
-			onUpdate: () => {
-				this.moove(this.state.e);
-			}
-		});
-
-		TweenLite.to(this.state.e, 23, {
-			delay: 1.5,
-			ease: Power3.easeOut,
-			offsetX: Math.random() * window.innerWidth,
-			offsetY: Math.random() * window.innerHeight,
-			onUpdate: () => {
-				this.moove(this.state.e);
-			}
-		});
-
-		TweenLite.to(this.state.e, 1.5, {
-			delay: 3,
-			ease: Power3.easeOut,
-			offsetX: Math.random() * window.innerWidth,
-			offsetY: Math.random() * window.innerHeight,
-			onUpdate: () => {
-				this.moove(this.state.e);
-			}
-		});
-
+		this.tweenLitHandler(this.state.e, 12, 0);
+		this.tweenLitHandler(this.state.e, 23, 1.5);
+		this.tweenLitHandler(this.state.e, 1.5, 3);
 
 		document.addEventListener("mousemove", e => {
 			this.moove(e);
 		});
 
+	}
+
+	tweenLitHandler (state, quantity, delay){
+		TweenLite.to(state, quantity, {
+			delay: delay,
+			ease: Power3.easeOut,
+			offsetX: Math.random() * window.innerWidth,
+			offsetY: Math.random() * window.innerHeight,
+			onUpdate: () => {
+				this.moove(state);
+			}
+		});
 	}
 
 	mapRange(value, low1, high1, low2, high2) {
@@ -99,8 +83,6 @@ class App extends Component {
 
 	moove(e) {
 		this.state.layers.forEach(layer => {
-
-
 			let duration = parseFloat(layer.getAttribute("data-duration"));
 			let offsetX = window.innerWidth / 2 - e.offsetX;
 			let offsetY = window.innerHeight / 2 - e.offsetY;
@@ -113,8 +95,6 @@ class App extends Component {
 				x: x,
 				scale: 1.25
 			});
-
-
 		});
 	}
 
@@ -149,7 +129,6 @@ class App extends Component {
 		let maxHeight = randomNumberCreator(10, 1);
 		let positionx = randomNumberCreator(0, 0);
 		let positiony = randomNumberCreator(100, 0);
-
 		return {
 			maxWidth,
 			maxHeight,
@@ -169,10 +148,9 @@ class App extends Component {
 		});
 	}
 
-
 	selectImageHandler(counter) {
 		if (counter > 5) {
-			const randomImage = this.state.imagesArr[randomNumberCreator(7, 1)];
+			const randomImage = this.state.imagesArr[randomNumberCreator((this.state.imagesArr.length - 1), 1)];
 			this.setState({
 				backgroundImage: randomImage,
 				seconds: -1,
@@ -180,9 +158,7 @@ class App extends Component {
 		}
 	}
 
-
 	render() {
-
 		let randomGlitches = this.state.glitchesAvailable.map(glitch => (<RandomGlitchZoomComponent
 			maxHeight={glitch.maxHeight}
 			maxWidth={glitch.maxWidth}
@@ -192,18 +168,13 @@ class App extends Component {
 			imageSrc={this.state.backgroundImage}
 		/>
 		));
-
-
 		return (
 			<div className="App">
 				<div className="text-container" >
 				{}
-				</div>
-				
+				</div>		
 				{this.state.randomGlitchZoom ? randomGlitches : ''}
 				<div className="container">
-
-
 					<div style={{ backgroundImage: "url(" + this.state.backgroundImage + ")" }} ref={el => this.layer3 = el} className="b" data-duration="5"></div>
 					<div style={{ backgroundImage: "url(" + this.state.backgroundImage + ")" }} ref={el => this.layer2 = el} className="g" data-duration="3"></div>
 					<div style={{ backgroundImage: "url(" + this.state.backgroundImage + ")" }} ref={el => this.layer1 = el} className="r" data-duration="1"></div>

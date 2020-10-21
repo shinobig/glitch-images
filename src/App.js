@@ -11,6 +11,8 @@ import image7 from './images/image7.jpg'
 import { randomNumberCreator } from './components/ultis/utils';
 import RandomGlitchZoomComponent from './components/randomGlitchZoomComponent/randomGlitchZoomComponent';
 import TitleGlitchComponent from './components/ttitleGlitchComponent/titleGlitchComponent';
+import RandomTextComponent from './components/randomTextComponent/randomTextComponent';
+import song from './music/public-memory-as-you-wish.mp3'
 //import RandomGlitchZoomComponentTest from './components/randomGlitchZoomComponent/randomGlitchZoomComponentTest';
 
 import { TweenMax, Power3, TweenLite } from 'gsap';
@@ -32,6 +34,7 @@ class App extends Component {
 			glitchSizes: {},
 			numberofGlitches: 0,
 			glitchesAvailable: [],
+			songAudio: document.getElementById('song'),
 		}
 		this.imageItem = null;
 		this.myTween = null;
@@ -46,19 +49,25 @@ class App extends Component {
 		this.calculateGlitch = this.calculateGlitch.bind(this);
 		this.selectImageHandler = this.selectImageHandler.bind(this);
 		this.tweenLitHandler = this.tweenLitHandler.bind(this);
+		this.playAudioHandler = this.playAudioHandler.bind(this);
+	}
+
+	playAudioHandler(){
+		document.getElementById('song').play();
 	}
 
 	componentDidMount() {
 		let newLayers = [this.layer1, this.layer2, this.layer3];
 		this.imageTimerHandler();
 		this.setState({
-			layers: newLayers
+			layers: newLayers,
+			songAudio: document.getElementById('song'),
 		});
 
 		this.tweenLitHandler(this.state.e, 12, 0);
 		this.tweenLitHandler(this.state.e, 23, 1.5);
 		this.tweenLitHandler(this.state.e, 1.5, 3);
-
+		this.playAudioHandler()
 		document.addEventListener("mousemove", e => {
 			this.moove(e);
 		});
@@ -101,11 +110,13 @@ class App extends Component {
 	imageTimerHandler() {
 		this.setState({
 			interval: setInterval(() => {
+				
 				this.randomGlitchZoomHandler();
 				this.createGlitchRows();
 				let newSeconds = this.state.seconds + .1;
 				this.setSeconds(newSeconds);
 				this.selectImageHandler(newSeconds);
+				
 			}, 100),
 		});
 	}
@@ -150,7 +161,7 @@ class App extends Component {
 
 	selectImageHandler(counter) {
 		if (counter > 5) {
-			const randomImage = this.state.imagesArr[randomNumberCreator((this.state.imagesArr.length - 1), 1)];
+			const randomImage = this.state.imagesArr[randomNumberCreator((this.state.imagesArr.length), 0)];
 			this.setState({
 				backgroundImage: randomImage,
 				seconds: -1,
@@ -170,6 +181,7 @@ class App extends Component {
 		));
 		return (
 			<div className="App">
+				<RandomTextComponent />
 				<div className="text-container" >
 				{}
 				</div>		
@@ -180,7 +192,7 @@ class App extends Component {
 					<div style={{ backgroundImage: "url(" + this.state.backgroundImage + ")" }} ref={el => this.layer1 = el} className="r" data-duration="1"></div>
 				</div>
 
-
+			  <audio id="song" src={song}></audio>
 
 			</div>
 		);

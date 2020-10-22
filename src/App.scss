@@ -3,10 +3,12 @@ body {
   width: 100vw;
 }
 
-.App{
-  width: 100vw;
-  height: 100vh;
+.App {
+  width: 110vw;
+  height: 110vh;
   overflow: hidden;
+  margin: -15px 0 0 -15px;
+  background-color: black;
 }
 
 .container {
@@ -25,7 +27,7 @@ body {
     width: 90%;
     height: 110vh;
     margin-left: 10%;
-    top:10%;
+    top: 10%;
     position: absolute;
     background-size: cover;
     mix-blend-mode: screen;
@@ -38,8 +40,8 @@ body {
     }
 
     &.g {
-			background-color: lime;
-			opacity: .9;
+      background-color: lime;
+      opacity: .9;
     }
 
     &.b {
@@ -65,20 +67,20 @@ body {
   position: absolute;
 }
 
-.glitch-text{
+.glitch-text {
 
-	width: 100vw;
-	
-	h2{
-		font-family: 'Courier Prime', monospace;
-		color:white;
-		text-align: center;
-	}
+  width: 100vw;
+
+  h2 {
+    font-family: 'Courier Prime', monospace;
+    color: white;
+    text-align: center;
+  }
 }
 
 // Glitch text
 
-.glitch-text-holder{
+.glitch-text-holder {
   position: absolute;
   z-index: 105;
   opacity: 0.7;
@@ -178,49 +180,205 @@ h1 {
 
 /* Expanded Animations */
 @keyframes glitch-animation {
-  0% { @include rect(42px, 44px); }
-  5% { @include rect(12px, 59px); }
-  10% { @include rect(48px, 29px); }
-  15.0% { @include rect(42px, 73px); }
-  20% { @include rect(63px, 27px); }
-  25% { @include rect(34px, 55px); }
-  30.0% { @include rect(86px, 73px); }
-  35% { @include rect(20px, 20px); }
-  40% { @include rect(26px, 60px); }
-  45% { @include rect(25px, 66px); }
-  50% { @include rect(57px, 98px); }
-  55.0% { @include rect(5px, 46px); }
-  60.0% { @include rect(82px, 31px); }
-  65% { @include rect(54px, 27px); }
-  70% { @include rect(28px, 99px); }
-  75% { @include rect(45px, 69px); }
-  80% { @include rect(23px, 85px); }
-  85.0% { @include rect(54px, 84px); }
-  90% { @include rect(45px, 47px); }
-  95% { @include rect(37px, 20px); }
-  100% { @include rect(4px, 91px); }
+  0% {
+    @include rect(42px, 44px);
+  }
+
+  5% {
+    @include rect(12px, 59px);
+  }
+
+  10% {
+    @include rect(48px, 29px);
+  }
+
+  15.0% {
+    @include rect(42px, 73px);
+  }
+
+  20% {
+    @include rect(63px, 27px);
+  }
+
+  25% {
+    @include rect(34px, 55px);
+  }
+
+  30.0% {
+    @include rect(86px, 73px);
+  }
+
+  35% {
+    @include rect(20px, 20px);
+  }
+
+  40% {
+    @include rect(26px, 60px);
+  }
+
+  45% {
+    @include rect(25px, 66px);
+  }
+
+  50% {
+    @include rect(57px, 98px);
+  }
+
+  55.0% {
+    @include rect(5px, 46px);
+  }
+
+  60.0% {
+    @include rect(82px, 31px);
+  }
+
+  65% {
+    @include rect(54px, 27px);
+  }
+
+  70% {
+    @include rect(28px, 99px);
+  }
+
+  75% {
+    @include rect(45px, 69px);
+  }
+
+  80% {
+    @include rect(23px, 85px);
+  }
+
+  85.0% {
+    @include rect(54px, 84px);
+  }
+
+  90% {
+    @include rect(45px, 47px);
+  }
+
+  95% {
+    @include rect(37px, 20px);
+  }
+
+  100% {
+    @include rect(4px, 91px);
+  }
 }
 
 @keyframes glitch-animation-2 {
-  0% { @include rect(65px, 100px); }
-  5% { @include rect(52px, 74px); }
-  10% { @include rect(79px, 85px); }
-  15.0% { @include rect(75px, 5px); }
-  20% { @include rect(67px, 61px); }
-  25% { @include rect(14px, 79px); }
-  30.0% { @include rect(1px, 66px); }
-  35% { @include rect(86px, 30px); }
-  40% { @include rect(23px, 98px); }
-  45% { @include rect(85px, 72px); }
-  50% { @include rect(71px, 75px); }
-  55.0% { @include rect(2px, 48px); }
-  60.0% { @include rect(30px, 16px); }
-  65% { @include rect(59px, 50px); }
-  70% { @include rect(41px, 62px); }
-  75% { @include rect(2px, 82px); }
-  80% { @include rect(47px, 73px); }
-  85.0% { @include rect(3px, 27px); }
-  90% { @include rect(26px, 55px); }
-  95% { @include rect(42px, 97px); }
-  100% { @include rect(38px, 49px); }
+  0% {
+    @include rect(65px, 100px);
+  }
+
+  5% {
+    @include rect(52px, 74px);
+  }
+
+  10% {
+    @include rect(79px, 85px);
+  }
+
+  15.0% {
+    @include rect(75px, 5px);
+  }
+
+  20% {
+    @include rect(67px, 61px);
+  }
+
+  25% {
+    @include rect(14px, 79px);
+  }
+
+  30.0% {
+    @include rect(1px, 66px);
+  }
+
+  35% {
+    @include rect(86px, 30px);
+  }
+
+  40% {
+    @include rect(23px, 98px);
+  }
+
+  45% {
+    @include rect(85px, 72px);
+  }
+
+  50% {
+    @include rect(71px, 75px);
+  }
+
+  55.0% {
+    @include rect(2px, 48px);
+  }
+
+  60.0% {
+    @include rect(30px, 16px);
+  }
+
+  65% {
+    @include rect(59px, 50px);
+  }
+
+  70% {
+    @include rect(41px, 62px);
+  }
+
+  75% {
+    @include rect(2px, 82px);
+  }
+
+  80% {
+    @include rect(47px, 73px);
+  }
+
+  85.0% {
+    @include rect(3px, 27px);
+  }
+
+  90% {
+    @include rect(26px, 55px);
+  }
+
+  95% {
+    @include rect(42px, 97px);
+  }
+
+  100% {
+    @include rect(38px, 49px);
+  }
+}
+
+.event-will-start {
+  background-color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 200;
+  text-align: center;
+  font-size: 2em;
+}
+
+.album-image-holder {
+  padding: 10px;
+  width: 15%;
+  height: 33%;
+  border: 1px solid #ccc;
+  margin: 5% auto;
+}
+
+.album-image {
+  opacity: .7;
+  width: 100%;
+  height: 100%;
+
+}
+
+.album-image:hover {
+  opacity: 1;
+  cursor: pointer;
 }
